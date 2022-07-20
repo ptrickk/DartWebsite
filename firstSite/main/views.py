@@ -10,13 +10,12 @@ def index(response, id):
     dict = {"name":user.name}
     return render(response, "main/playercreated.html", dict)
 
-def subpage(response, id):
-    player = Player.objects.get(id=id)
-    return HttpResponse("<h1>Hallo %s</h1><h3>Task: %s</h3>" % (player.name, player.name))
-
 def playerlist(response):
     players = Player.objects
     return render(response, "main/playerlist.html", {"players": players})
+
+def home(response):
+    return render(response, "main/home.html", {})
 
 def addPlayer(response):
     if response.method == "POST":

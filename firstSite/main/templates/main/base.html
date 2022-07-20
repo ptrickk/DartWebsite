@@ -2,10 +2,48 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <style type="text/css">
+      .sidenav {
+        height: 100%;
+        widht: 14em;
+        position: fixed;
+        z-index:1;
+        top: 0;
+        left: 0;
+        background-color:#111;
+        overflow-x: :hidden;
+        padding-top:1.2em;
+      }
+
+      .sidenav a {
+        padding: 0.4em 0.6em 0.3em 1.0em;
+        text-decoration: none;
+        font-size:1.5em;
+        color: #818181;
+        display: block;
+      }
+
+      .sidenav a:hover{
+        color:#f1f1f1;
+      }
+
+      .main{
+			   margin-left:12em;
+			   padding: 0em 1em;
+		  }
+    </style>
+
     <title>{% block title %}Default{% endblock %}</title>
   </head>
   <body>
-    <div >
+    <div class="sidenav">
+        <a href="/home">Home</a>
+        <a href="/add">Play Game</a>
+        <a href="/playerlist">Playerlist</a>
+        <a href="/home">Add Player</a>
+    </div>
+
+    <div id="content", name="content", class="main">
       {% block content %}
 
       {% endblock %}
