@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Playerlist
+{% endblock %}
+
+{% block content %}
+<h4>Hier die Playerlist:</h4>
+  <ul>
+    {% for p in players.all %}
+      <li>{{p.id}} : {{p.name}}</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
