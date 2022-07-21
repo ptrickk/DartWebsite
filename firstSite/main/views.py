@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Player
-from .forms import CreatePlayer
+from .models import Player, Game
+from .forms import CreatePlayer, SelectGame
+
+from django.contrib import messages
 
 # Create your views here.
 
@@ -16,6 +18,21 @@ def playerlist(response):
 
 def home(response):
     return render(response, "main/home.html", {})
+
+def startGame(response):
+    if response.method == "POST":
+        form = SelectGame(response.POST)
+        if form.is_valid():
+            mode = form.cleaned_data["mode"]
+            p1 = Player.objects.get(id=response.POST.get("player1"))
+            p2 = Player.objects.get(id=response.POST.get("player2"))
+            g = Game(player1=p1, player2=p2,gamemode=mode)
+            g.save()
+    else:
+        form = SelectGame()
+    players = Player.objects.all()
+    dict = {"form":form, "players":players}
+    return render(response, "main/start.html", dict)
 
 def addPlayer(response):
     if response.method == "POST":

@@ -11,6 +11,7 @@ class Player(models.Model):
 class Game(models.Model):
     player1 = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="player1")
     player2 = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="player2")
+    gamemode = models.CharField(max_length=15, default="none")
     playdate = models.DateTimeField(auto_now=True)
 
 class Leg(models.Model):

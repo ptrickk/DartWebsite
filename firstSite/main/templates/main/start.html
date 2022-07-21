@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Start Game
+{% endblock %}
+
+{% block content %}
+  <div class="form-group">
+    <form class="" action="/start/" method="POST">
+        {% csrf_token %}
+        {{form}}
+
+        <select class="form-control" name="player1" id="player1">
+          <option value="" disabled selected>Player 1</option>
+          {% for p in players %}
+          <option value={{p.id}}>{{ p.name }}
+          {% endfor %}
+       </select>
+       <select class="form-control" name="player2" id="player2">
+         <option value="" disabled selected>Player 2</option>
+         {% for p in players %}
+         <option value={{p.id}}>{{ p.name }}
+         {% endfor %}
+      </select>
+      <input type="submit" name="Start Game" value="Start Game" class="btn btn-primary">
+    </form>
+  </div>
+{% endblock %}

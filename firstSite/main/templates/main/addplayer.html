@@ -7,8 +7,10 @@ Add new Player
 {% block content %}
   <h4>Add Player</h4>
   <form class="" action="/add/" method="post">
-    {% csrf_token %}
-    {{form.as_p}} <!-- .as_table / .as_p / .as_ul -->
-    <input type="submit" name="Create" value="Create">
+    <div class="form-group">
+      {% csrf_token %}
+      {{form.as_p}} <!-- .as_table / .as_p / .as_ul -->
+      <input type="submit" name="Create" value="Create" class="btn btn-primary">
+    </div>
   </form>
 {% endblock %}
