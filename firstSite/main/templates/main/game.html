@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Playerlist
+{% endblock %}
+
+{% block content %}
+    {% if valid == 1%}
+        <h1>{{game.id}}</h1>
+            <!-- HIER STANDINGS -->
+        <form>
+            <!-- HIER VISIT FORM EINFÜGEN -->
+        </form>
+
+    {% else %}
+        <h1>Zurzeit kein Spiel</h1>
+    {% endif %}
+{% endblock %}
