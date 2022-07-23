@@ -21,3 +21,8 @@ class CreateGame(forms.Form):
     player1 = forms.CharField(max_length=10)
     player2 = forms.CharField(max_length=10)
     legs = forms.IntegerField()
+
+class LogVisit(forms.Form):
+    throw1 = forms.IntegerField()
+    throw2 = forms.IntegerField()
+    throw3 = forms.IntegerField()
