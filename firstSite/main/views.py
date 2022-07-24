@@ -14,7 +14,21 @@ def index(response, id):
 
 def playerlist(response):
     players = Player.objects
-    return render(response, "main/playerlist.html", {"players": players})
+    games = Game.objects.all()
+    wins = {}
+    for game in games:
+        if game.done:
+            if game.winner == 0:
+                id = Player.objects.get(id=game.player1.id).id
+            else:
+                id = Player.objects.get(id=game.player2.id).id
+            if id in wins:
+                wins[id] += 1
+            else:
+                wins[id] = 1
+
+
+    return render(response, "main/playerlist.html", {"players": players, "wins":wins})
 
 def home(response):
     return render(response, "main/home.html", {})

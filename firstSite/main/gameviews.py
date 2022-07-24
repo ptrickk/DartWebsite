@@ -60,7 +60,18 @@ def playGame(response):
             scores = Scores(visits, g, 501)
 
             if len(visits) == 0:
-                last_visit = Visit(leg=active_leg, player=active_player, number=0, throw1=-1)
+
+                if len(legs) > 1:
+                    last_leg = Leg.objects.get(game=g, number=(active_leg.number-1))
+                    prev_f_visit = Visit.objects.get(leg=last_leg, number = 0)
+                    if prev_f_visit.player == g.player1:
+                        first_throw = g.player2
+                    else:
+                        first_throw = g.player1
+                else:
+                    first_throw = g.player1
+
+                last_visit = Visit(leg=active_leg, player=first_throw, number=0, throw1=-1)
                 next_player = active_player
             else:
                 last_visit = Visit.objects.get(leg=active_leg, number=(len(visits)-1))
