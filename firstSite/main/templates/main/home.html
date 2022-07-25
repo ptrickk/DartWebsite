@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Dart's Home
+{% endblock %}
+
+{% block content %}
+
+<div class="container" style="padding: 2rem 0rem 0rem 0rem">
+    <h3>Hier können sie Dart spiele Tracken und gegen Computer spielen</h3>
+</div>
+
+<div class="container" style="padding: 2rem 0rem 0rem 0rem">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Spiel starten</h5>
+                    <p class="card-text">Hier kannst du Spiele gegen den Computer oder deine Freunde machen.</p>
+                    <a href="/start/" class="btn btn-primary">Jetzt spielen!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Spieler erstellen</h5>
+                    <p class="card-text">Hier kannst du einen neuen Spieler anlegen</p>
+                    <a href="/start/" class="btn btn-primary">Neuer Spieler</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            One of three columns
+        </div>
+    </div>
+</div>
+
+<!-- Content here -->
+
+
+{% endblock %}

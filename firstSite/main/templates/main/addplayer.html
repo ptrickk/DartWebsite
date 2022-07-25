@@ -5,10 +5,18 @@ Add new Player
 {% endblock %}
 
 {% block content %}
-  <h4>Add Player</h4>
-  <form class="" action="/add/" method="post">
-    {% csrf_token %}
-    {{form.as_p}} <!-- .as_table / .as_p / .as_ul -->
-    <input type="submit" name="Create" value="Create">
-  </form>
+<h4>Add Player</h4>
+<form class="" action="/add/" method="post">
+    <div class="form-group">
+        {% csrf_token %}
+         <!--{{form.as_p}} .as_table / .as_p / .as_ul -->
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Username</span>
+            </div>
+            <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <input type="submit" name="Create" value="Create" class="btn btn-primary">
+    </div>
+</form>
 {% endblock %}

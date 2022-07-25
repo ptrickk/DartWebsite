@@ -1,0 +1,55 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Start Game
+{% endblock %}
+
+{% block content %}
+<div class="form-group">
+    <form class="" action="/start/" method="POST">
+        {% csrf_token %}
+
+
+        <div class="container">
+            <div class="row" style="padding: 2rem">
+                <div class="col-sm">
+                    <select class="form-control" name="player1" id="player1" required>
+                        <option value="" disabled selected>Player 1</option>
+                        {% for p in players %}
+                        <option value={{p.id}}>{{ p.name }}
+                            {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm">
+                    <select class="form-control" name="player2" id="player2" required>
+                        <option value="" disabled selected>Player 2</option>
+                        {% for p in players %}
+                        <option value={{p.id}}>{{ p.name }}
+                            {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" style="padding: 1rem 2rem 0rem 2rem">
+                <div class="col-sm">
+                    {{form}}
+                </div>
+                <div class="col-sm">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Legs zum Sieg</span>
+                        </div>
+                        <input type="number" name="legs" class="form-control" value="2" min="1" max="10"
+                               aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <input type="submit" name="Start Game" value="Start Game" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

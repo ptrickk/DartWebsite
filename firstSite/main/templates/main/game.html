@@ -1,0 +1,132 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Game
+{% endblock %}
+
+{% block content %}
+<!--<meta http-equiv="refresh" content="5" /> -->
+{% if valid == 1 and newleg == 0 and done == 0%}
+<div class="container">
+    <div class="row justify-content-md-center" style="margin: 1rem 0rem 0rem 0rem">
+        <div class="col col-lg-3">
+            <h1><span class="border border-primary" style="padding: 0rem 0.5rem 0rem 0.5rem">{{standing.0}}</span>
+                {{game.player1}}</h1>
+        </div>
+        <div class="col-md-auto">
+            <h2>:</h2>
+        </div>
+        <div class="col col-lg-3" style="text-align: right">
+            <h1>{{game.player2}} <span class="border border-primary"
+                                       style="padding: 0rem 0.5rem 0rem 0.5rem">{{standing.1}}</span></h1>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-2">
+            <h2>{{score.0}}</h2>
+        </div>
+        <div class="col-md-auto" style="text-align: center">
+            <h2>:</h2>
+        </div>
+        <div class="col col-lg-2" style="text-align: right">
+            <h2>{{score.1}}</h2>
+        </div>
+    </div>
+    {% if bust == 1 %}
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto" style="text-align: center">
+            <h3>&#10060; BUST &#10060;</h3>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto" style="text-align: center">
+            <h1>&#127919; {{player}}</h1>
+        </div>
+    </div>
+</div>
+<!-- HIER STANDINGS -->
+<form class="" action="/game/" method="POST">{% csrf_token %}
+    <div class="form-group">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">1. Wurf</span>
+            </div>
+            <input type="number" name="throw1" class="form-control" placeholder="0" min="0" max="60"
+                   aria-describedby="basic-addon1">
+
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">2. Wurf</span>
+            </div>
+            <input type="number" name="throw2" class="form-control" placeholder="0" min="0" max="60"
+                   aria-describedby="basic-addon1">
+
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">3. Wurf</span>
+            </div>
+            <input type="number" name="throw3" class="form-control" placeholder="0" min="0" max="60"
+                   aria-describedby="basic-addon1">
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto" style="text-align: center">
+                <input type="submit" name="Start Game" value="Bestätigen!" class="btn btn-primary">
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- LISTE DER GESPIELTEN VISITS -->
+<ul class="list-group">
+    {% for v in visits %}
+    {% if not v.throw1 == -1 %}
+    {% if not v.throw3 == -1 %}
+    <li class="list-group-item">{{v.number}} {{v.player}} {{v.throw1}} {{v.throw2}} {{v.throw3}}</li>
+    {% else %}
+    <li class="list-group-item">{{v.number}} {{v.player}} BUST</li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+</ul>
+{% elif newleg == 1 and done == 0 %}
+<div class="container" style="margin: 1rem 0rem 0rem 0rem">
+    <form class="" action="/game/" method="GET">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto" style="text-align: center">
+                <h3>{{player}} hat das Leg gewonnen!</h3>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto" style="text-align: center">
+                <input type="submit" name="submit" value="Weiter!" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+</div>
+{% elif done == 1%}
+</form>
+<div class="container" style="margin: 1rem 0rem 0rem 0rem">
+    <form class="" action="/home/" method="GET">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto" style="text-align: center">
+                <h1>{{player}} hat gewonnen!</h1>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto" style="text-align: center">
+                <input type="submit" name="submit" value="Startseite" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+    <!-- STATISTIKEN FOLGEN -->
+</div>
+{% else %}
+<div class="container" style="margin: 1rem 0rem 0rem 0rem">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto" style="text-align: center">
+            <h1>Zurzeit kein Spiel</h1>
+        </div>
+    </div>
+
+</div>
+{% endif %}
+{% endblock %}

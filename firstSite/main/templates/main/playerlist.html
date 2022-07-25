@@ -5,11 +5,18 @@ Playerlist
 {% endblock %}
 
 {% block content %}
-<h4>Hier die Playerlist:</h4>
-  <ul>
-    {% for p in players.all %}
-      <li>{{p.id}} : {{p.name}}</li>
-    {% endfor %}
-  </ul>
+<h4>Alle Spieler:</h4>
+<div class="container">
+    <ul class="list-group">
+        {% for p in players.all %}
+        <li class="list-group-item">{{p.name}}
+            {% if p.id in wins %}
+            <span class="badge badge-pill badge-primary">wins</span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
 
 {% endblock %}
