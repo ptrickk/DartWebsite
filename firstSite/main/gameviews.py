@@ -28,6 +28,7 @@ def playGame(response):
     dict = {"valid": 0}
     if 'g_id' in response.session:
         newleg = 0
+        bust = 0
 
         g_id = response.session['g_id']
         if g_id != -1:
@@ -94,6 +95,7 @@ def playGame(response):
 
             # Neues Visit verarbeiten
             if response.method == "POST":
+                print(response.POST)
                 form = LogVisit(response.POST)
                 if form.is_valid():
                     active_visit.throw1 = form.cleaned_data["throw1"]
@@ -111,7 +113,8 @@ def playGame(response):
                     if score < 0:
                         active_visit.throw1 = 0
                         active_visit.throw2 = 0
-                        active_visit.throw3 = 0
+                        active_visit.throw3 = -1 #BUST
+                        bust = 1
                     elif score == 0:
                         active_leg.winner = pid
                         active_leg.done = True
@@ -161,7 +164,8 @@ def playGame(response):
             else:
                 done = 0
 
-            dict = {"game": g, "valid": 1, "player":next_player, "score": scores, "visits": visits, "newleg":newleg, "standing": standing, "done":done}
+            print(bust)
+            dict = {"game": g, "valid": 1, "player":next_player, "score": scores, "visits": visits, "newleg":newleg, "standing": standing, "done":done, "bust":bust}
     else:
         dict = {"valid": 0}
     return render(response, "main/game.html", dict)
@@ -178,7 +182,7 @@ def Scores(visits, game, goal) -> []:
     score1 = goal
     score2 = goal
     for visit in visits:
-        if not visit.throw1 == -1:
+        if not visit.throw1 == -1 and not visit.throw3 == -1:
             sum = visit.throw1 + visit.throw2 + visit.throw3
             if visit.player.id == game.player1.id:
                 score1 -= sum
