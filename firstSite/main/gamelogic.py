@@ -57,5 +57,22 @@ def getActiveVisit(game, active_leg) -> Visit:
 
     return active_visit
 
-def getActivePlayer():
-    pass
+def Standings(legs, game) -> []:
+    wins = [0,0]
+    for leg in legs:
+        if leg.done:
+            wins[leg.winner] += 1
+
+    return wins
+
+def Scores(visits, game, goal) -> []:
+    score1 = goal
+    score2 = goal
+    for visit in visits:
+        if not visit.throw1 == -1 and not visit.throw3 == -1:
+            sum = visit.throw1 + visit.throw2 + visit.throw3
+            if visit.player.id == game.player1.id:
+                score1 -= sum
+            elif visit.player.id == game.player2.id:
+                score2 -= sum
+    return [score1, score2]
