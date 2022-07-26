@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Player, Game, Leg, Visit
 from .forms import CreatePlayer, SelectGame, CreateGame, LogVisit
-
+from .gamelogic import getActiveLeg, getActiveVisit, getActivePlayer
 
 def startGame(response):
     if response.method == "POST":
@@ -33,76 +33,22 @@ def playGame(response):
         g_id = response.session['g_id']
         if g_id != -1:
             g = Game.objects.get(id=g_id)
-            legs = Leg.objects.filter(game=g)
 
-            if len(legs) == 0:  # Das erste Leg
-                active_leg = Leg(game=g, number=0, winner=-1, done=False)
-                active_leg.save()
-                active_player = g.player1
-            else:
-                active_leg = Leg.objects.get(game=g, number=(len(legs)-1))
+            active_leg = getActiveLeg(g)#Active Leg is defined
 
-                if active_leg.done: #Muss ein neues Leg angefangen werden
-                    firstThrow = Visit.objects.get(leg=active_leg, number=0)
-
-                    if firstThrow.player == g.player1:
-                        active_player = g.player2
-                    elif firstThrow.player == g.player2:
-                        active_player = g.player1
-
-                    active_leg = Leg(game=g, number=(len(legs)), done=False, winner=-1)
-                    active_leg.save()
-                else: #Leg ist noch nicht zuende
-                    active_player = g.player1 #DEBUG
-
-            #Active Leg is defined
+            active_visit = getActiveVisit(g, active_leg)#Active Visit & Player defined
 
             visits = Visit.objects.filter(leg=active_leg)
-            scores = Scores(visits, g, 501)
-
-            if len(visits) == 0:
-
-                if len(legs) > 1:
-                    last_leg = Leg.objects.get(game=g, number=(active_leg.number-1))
-                    prev_f_visit = Visit.objects.get(leg=last_leg, number = 0)
-                    if prev_f_visit.player == g.player1:
-                        first_throw = g.player2
-                    else:
-                        first_throw = g.player1
-                else:
-                    first_throw = g.player1
-
-                last_visit = Visit(leg=active_leg, player=first_throw, number=0, throw1=-1)
-                next_player = active_player
-            else:
-                last_visit = Visit.objects.get(leg=active_leg, number=(len(visits)-1))
-
-                if last_visit.player == g.player1:
-                    active_player = g.player2
-                    next_player = g.player1
-                elif last_visit.player == g.player2:
-                    active_player = g.player1
-                    next_player = g.player2
-
-            if not last_visit.throw1 == -1:
-                active_visit = Visit(leg=active_leg, player=active_player, number=len(visits), throw1=-1)
-                active_visit.save()
-            else:
-                active_visit = last_visit
-                active_player = active_visit.player
-
-            #Active Visit & Player defined
 
             # Neues Visit verarbeiten
             if response.method == "POST":
-                print(response.POST)
                 form = LogVisit(response.POST)
                 if form.is_valid():
                     active_visit.throw1 = form.cleaned_data["throw1"]
                     active_visit.throw2 = form.cleaned_data["throw2"]
                     active_visit.throw3 = form.cleaned_data["throw3"]
 
-                    if active_player == g.player1:
+                    if active_visit.player == g.player1:
                         pid = 0
                     else:
                         pid = 1
@@ -164,7 +110,6 @@ def playGame(response):
             else:
                 done = 0
 
-            print(bust)
             dict = {"game": g, "valid": 1, "player":next_player, "score": scores, "visits": visits, "newleg":newleg, "standing": standing, "done":done, "bust":bust}
     else:
         dict = {"valid": 0}
