@@ -46,7 +46,7 @@ Game
     </div>
 </div>
 <!-- HIER STANDINGS -->
-<form class="" action="/game/" method="POST">{% csrf_token %}
+<form class="" action="/process/" method="POST">{% csrf_token %}
     <div class="form-group">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -87,21 +87,6 @@ Game
     {% endif %}
     {% endfor %}
 </ul>
-{% elif newleg == 1 and done == 0 %}
-<div class="container" style="margin: 1rem 0rem 0rem 0rem">
-    <form class="" action="/game/" method="GET">
-        <div class="row justify-content-md-center">
-            <div class="col-md-auto" style="text-align: center">
-                <h3>{{player}} hat das Leg gewonnen!</h3>
-            </div>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="col-md-auto" style="text-align: center">
-                <input type="submit" name="submit" value="Weiter!" class="btn btn-primary">
-            </div>
-        </div>
-    </form>
-</div>
 {% elif done == 1%}
 </form>
 <div class="container" style="margin: 1rem 0rem 0rem 0rem">

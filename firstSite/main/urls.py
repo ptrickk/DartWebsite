@@ -10,5 +10,6 @@ urlpatterns = [
     path('<int:id>', views.index, name='index'),
     path('add/', views.addPlayer, name='addPlayer'),
     path('start/', gameviews.startGame, name='startGame'),
-    path('game/', gameviews.playGame, name='playGame')
+    path('game/', gameviews.playGame, name='playGame'),
+    path('process/', gameviews.processGame, name="processGame")
 ]
