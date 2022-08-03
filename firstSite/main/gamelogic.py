@@ -76,3 +76,44 @@ def Scores(visits, game, goal) -> []:
             elif visit.player.id == game.player2.id:
                 score2 -= sum
     return [score1, score2]
+
+def Averages(game) -> []:
+    avg = [0 , 0]
+    t1 = 0
+    t2 = 0
+    legs = Leg.objects.filter(game = game)
+    for leg in legs:
+        v1 = Visit.objects.filter(leg = leg, player=game.player1)
+        v2 = Visit.objects.filter(leg = leg, player=game.player2)
+        winner = leg.winner
+
+        for v in v1:
+            if not v.throw1 == -1:
+                avg[0] += v.throw1 + v.throw2 + v.throw3
+                t1 += 3
+
+        if winner == 0:
+            last = v1.pop(len(v1-1))
+            if last.throw2 == 0 and last.throw3 == 0:
+                t1 -= 2
+            if last.throw3 == 0:
+                t1 -= 1
+
+        for v in v2:
+            if not v.throw1 == -1:
+                avg[1] += v.throw1 + v.throw2 + v.throw3
+                t2 += 3
+
+        if winner == 1:
+            last = v2.pop(len(v1-1))
+            if last.throw2 == 0 and last.throw3 == 0:
+                t2 -= 2
+            if last.throw3 == 0:
+                t2 -= 1
+
+    if not t1 == 0:
+        avg[0] /= t1
+    if not t2 == 0:
+        avg[1] /= t2
+
+    return avg

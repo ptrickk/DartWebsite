@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Player, Game, Leg, Visit
 from .forms import CreatePlayer, SelectGame, CreateGame, LogVisit
-from .gamelogic import getActiveLeg, getActiveVisit, Scores, Standings
+from .gamelogic import getActiveLeg, getActiveVisit, Scores, Standings, Averages
 
 def startGame(response):
     if response.method == "POST":
@@ -78,6 +78,7 @@ def playGame(response):
             legs = Leg.objects.filter(game=g)
             scores = Scores(visits, g, 501)
             standing = Standings(legs, g)
+            avg = Averages(g)
 
             if active_visit.player == g.player1:
                 pid = 0
@@ -131,7 +132,7 @@ def playGame(response):
                 done = 0
 
             dict = {"valid": 1,"game": g, "visits": visits,
-                    "player":next_player, "score": scores, "standing": standing,
+                    "player":next_player, "score": scores, "standing": standing, "avg":avg,
                     "newleg":newleg, "done":done, "bust":bust}
     else:
         dict = {"valid": 0}
