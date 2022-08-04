@@ -5,49 +5,47 @@ Game
 {% endblock %}
 
 {% block content %}
-<!--<meta http-equiv="refresh" content="5" /> -->
 {% if valid == 1 and newleg == 0 and done == 0%}
-{{avg.0}}:{{avg.1}}
 <div class="container">
     <div class="row justify-content-md-center" style="margin: 1rem 0rem 0rem 0rem">
         <div class="col col-lg-3">
-            <h1><span class="border border-primary" style="padding: 0rem 0.5rem 0rem 0.5rem">{{standing.0}}</span>
-                {{game.player1}}</h1>
+            <p class="fs-1"><span class="border border-primary" style="padding: 0rem 0.5rem 0rem 0.5rem">{{standing.0}}</span>
+                {{game.player1}}</p>
         </div>
         <div class="col-md-auto">
-            <h2>:</h2>
+            <p class="fs-2" style="text-align: center;">:</p>
         </div>
         <div class="col col-lg-3" style="text-align: right">
-            <h1>{{game.player2}} <span class="border border-primary"
-                                       style="padding: 0rem 0.5rem 0rem 0.5rem">{{standing.1}}</span></h1>
+            <p class="fs-1">{{game.player2}} <span class="border border-primary"
+                                       style="padding: 0rem 0.5rem 0rem 0.5rem">{{standing.1}}</span></p>
         </div>
     </div>
     <div class="row justify-content-md-center">
-        <div class="col col-lg-2">
-            <h2>{{score.0}}</h2>
+        <div class="col col-sm-4">
+            <p class="fs-2" style="text-align: center;">{{score.0}}</p>
         </div>
         <div class="col-md-auto" style="text-align: center">
-            <h2>:</h2>
+            <p class="fs-2" style="text-align: center;">:</p>
         </div>
-        <div class="col col-lg-2" style="text-align: right">
-            <h2>{{score.1}}</h2>
+        <div class="col col-sm-4" style="text-align: right">
+            <p class="fs-2" style="text-align: center;">{{score.1}}</p>
         </div>
     </div>
     {% if bust == 1 %}
     <div class="row justify-content-md-center">
         <div class="col-md-auto" style="text-align: center">
-            <h3>&#10060; BUST &#10060;</h3>
+            <p class="fs-3" style="text-align: center;">&#10060; BUST &#10060;</p>
         </div>
     </div>
     {% endif %}
     <div class="row justify-content-md-center">
         <div class="col-md-auto" style="text-align: center">
-            <h1>&#127919; {{player}}</h1>
+             <p class="fs-2" style="text-align: center;">&#127919; {{player}}</p>
         </div>
     </div>
 </div>
 <!-- HIER STANDINGS -->
-<form class="" action="/process/" method="POST">{% csrf_token %}
+<form class="row g-3" action="/process/" method="POST">{% csrf_token %}
     <div class="form-group">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -70,11 +68,36 @@ Game
         </div>
         <div class="row justify-content-md-center">
             <div class="col-md-auto" style="text-align: center">
-                <input type="submit" name="Start Game" value="Bestätigen!" class="btn btn-primary">
+                <input type="submit" name="Start Game" value="Bestätigen" class="btn btn-primary">
             </div>
         </div>
     </div>
 </form>
+<!-- SPIEL STATISTIKEN-->
+<div style="margin: 2rem 0rem 1rem 0rem">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-2" style="text-align: left; width: 12rem;">
+            <p class="fs-5" style="margin: 0rem;">{{avg.0}}</p>
+        </div>
+        <div class="col-md-auto" style="text-align: center; width: 12rem;">
+            <p class="fs-5" style="margin: 0rem;">Average</p>
+        </div>
+        <div class="col col-lg-2" style="text-align: right; width: 12rem;">
+            <p class="fs-5" style="margin: 0rem;">{{avg.1}}</p>
+        </div>
+    </div>
+    <div class="row justify-content-md-center" style="margin: 0rem">
+        <div class="col col-lg-2" style="text-align: left; width: 12rem;">
+            <p class="fs-5">{{lavg.0}}</p>
+        </div>
+        <div class="col-md-auto" style="text-align: center; width: 12rem;">
+            <p class="fs-5">Leg Average</p>
+        </div>
+        <div class="col col-lg-2" style="text-align: right; width: 12rem;">
+            <p class="fs-5">{{lavg.1}}</p>
+        </div>
+    </div>
+</div>
 
 <!-- LISTE DER GESPIELTEN VISITS -->
 <ul class="list-group">
