@@ -12,5 +12,6 @@ urlpatterns = [
     path('start/', gameviews.startGame, name='startGame'),
     path('game/', gameviews.playGame, name='playGame'),
     path('process/', gameviews.processGame, name="processGame"),
-    path('gamebrowser/', statsviews.gamebrowser, name="gameBrowser")
+    path('gamebrowser/', statsviews.gamebrowser, name="gameBrowser"),
+    path('gamelog/<int:id>', statsviews.gamelog, name="gameLog")
 ]

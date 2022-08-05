@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92de87fb-4072-4c26-9529-25355da240da" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/firstSite/main/statsviews.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firstSite/main/templates/main/gamebrowser.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firstSite/main/templates/main/gamelog.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstSite/main/statsviews.py" beforeDir="false" afterPath="$PROJECT_DIR$/firstSite/main/statsviews.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firstSite/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/firstSite/main/templates/main/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firstSite/main/templates/main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/firstSite/main/templates/main/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstSite/main/templates/main/gamebrowser.html" beforeDir="false" afterPath="$PROJECT_DIR$/firstSite/main/templates/main/gamebrowser.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/firstSite/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/firstSite/main/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -44,11 +44,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\geert\PycharmProjects\djangoProject\firstSite\main" />
