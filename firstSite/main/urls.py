@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, mainPage, gameviews
+from . import views, gameviews, statsviews
 
 #SELF CREATED
 
@@ -11,5 +11,6 @@ urlpatterns = [
     path('add/', views.addPlayer, name='addPlayer'),
     path('start/', gameviews.startGame, name='startGame'),
     path('game/', gameviews.playGame, name='playGame'),
-    path('process/', gameviews.processGame, name="processGame")
+    path('process/', gameviews.processGame, name="processGame"),
+    path('gamebrowser/', statsviews.gamebrowser, name="gameBrowser")
 ]
